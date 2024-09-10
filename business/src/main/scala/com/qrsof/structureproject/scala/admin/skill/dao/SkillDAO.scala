@@ -1,7 +1,6 @@
-package com.qrsof.structureproject.scala.skill.dao
+package com.qrsof.structureproject.scala.admin.skill.dao
 
-import com.qrsof.structureproject.scala.skill.models.APIError
-import com.qrsof.structureproject.scala.skill.models.Skill
+import com.qrsof.structureproject.scala.admin.skill.models.{APIError, Skill}
 import java.util.UUID
 import scala.concurrent.Future
 

@@ -1,21 +1,21 @@
-package com.qrsof.structureproject.scala.skill
+package com.qrsof.structureproject.scala.daos
 
-
-import com.qrsof.structureproject.scala.skill.models.Skill
-import com.qrsof.structureproject.scala.skill.models.APIError
+import com.qrsof.structureproject.scala.admin.skill.dao.SkillDAO
+import com.qrsof.structureproject.scala.admin.skill.models.{APIError, Skill}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
-import play.api.mvc.*
+import play.api.mvc._
 import slick.jdbc.JdbcProfile
-import com.qrsof.structureproject.scala.skill.dao.SkillDAO
+
 import java.util.UUID
-import javax.inject.Inject
+import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
+@Singleton
 class SkillDAOImpl @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)(implicit executionContext: ExecutionContext) extends HasDatabaseConfigProvider[JdbcProfile] with SkillDAO {
 
   import profile.api._
 
-  implicit val skillTable = TableQuery[SkillTable]
+  implicit val skillTable: TableQuery[SkillTable] = TableQuery[SkillTable]
 
   //Implementamos las funciones
   override def getSkills(): Future[List[Skill]] = {
@@ -24,21 +24,24 @@ class SkillDAOImpl @Inject()(protected val dbConfigProvider: DatabaseConfigProvi
   }
 
   override def getSkillById(id: UUID): Future[Option[Skill]] =
-  db.run(skillTable.filter(_.id === id).result.headOption)
+    db.run(skillTable.filter(_.id === id).result.headOption)
 
 
-
- override def createSkill(skill: Skill): Future[Either[APIError, Skill]] = {
-   try {
-     val newSkill =  db.run(skillTable += skill)
-     Future{Right(skill)}
-   }
-   catch {
-     case e: Throwable => {
-       Future{Left(APIError("Error"))}
-     }
-   }
- }
+  override def createSkill(skill: Skill): Future[Either[APIError, Skill]] = {
+    try {
+      val newSkill = db.run(skillTable += skill)
+      Future {
+        Right(skill)
+      }
+    }
+    catch {
+      case e: Throwable => {
+        Future {
+          Left(APIError("Error"))
+        }
+      }
+    }
+  }
 
 
 

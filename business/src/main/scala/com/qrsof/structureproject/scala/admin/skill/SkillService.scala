@@ -1,11 +1,9 @@
-package com.qrsof.structureproject.scala.skill
+package com.qrsof.structureproject.scala.admin.skill
 
-import controllers.api.apiError.models.APIError
+import com.qrsof.structureproject.scala.admin.skill.models.{APIError, Skill}
 
 import java.util.UUID
 import scala.concurrent.Future
-import com.qrsof.structureproject.scala.skill.models.Skill
-import com.qrsof.structureproject.scala.skill.models.APIError
 
 
 trait SkillService {

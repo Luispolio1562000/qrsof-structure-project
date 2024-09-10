@@ -1,27 +1,22 @@
-package com.qrsof.structureproject.scala.skill
+package com.qrsof.structureproject.scala.admin.skill
 
-import controllers.api.apiError.models.APIError
-import play.api.db.slick.DatabaseConfigProvider
+import com.qrsof.structureproject.scala.admin.skill.dao.SkillDAO
+import com.qrsof.structureproject.scala.admin.skill.models.{APIError, Skill}
 import java.util.UUID
-import com.qrsof.structureproject.scala.skill.models.Skill
-import com.qrsof.structureproject.scala.skill.models.APIError
-import com.qrsof.structureproject.scala.skill.dao.SkillDAO
 import javax.inject.{Singleton, Inject}
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 
 @Singleton
-class SkillServiceImpl @Inject()(dbConfigProvider: DatabaseConfigProvider,
-                                 databaseExecutionContext: ExecutionContext,
-                                 skillRepository: SkillDAO) {
-  def getSkills(): Future[List[Skill]] = {
+class SkillServiceImpl @Inject()(skillRepository: SkillDAO) extends SkillService {
+  override def getSkills(): Future[List[Skill]] = {
     skillRepository.getSkills()
   }
 
-  def getSkillById(id: UUID): Future[Option[Skill]] = {
+  override def getSkillById(id: UUID): Future[Option[Skill]] = {
     skillRepository.getSkillById(id)
   }
 
-  def createSkill(skill: Skill): Future[Either[APIError, Skill]] = {
+  override def createSkill(skill: Skill): Future[Either[APIError, Skill]] = {
     skillRepository.createSkill(skill)
   }
 

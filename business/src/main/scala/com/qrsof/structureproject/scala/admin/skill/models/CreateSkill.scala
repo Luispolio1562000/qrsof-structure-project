@@ -1,4 +1,4 @@
-package com.qrsof.structureproject.scala.skill.models
+package com.qrsof.structureproject.scala.admin.skill.models
 
 import play.api.libs.json.{Json, OFormat}
 

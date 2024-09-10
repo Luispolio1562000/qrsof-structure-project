@@ -1,3 +1,3 @@
-package com.qrsof.structureproject.scala.skill.models
+package com.qrsof.structureproject.scala.admin.skill.models
 
 case class APIError(errorMessage: String)

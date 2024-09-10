@@ -1,3 +1,3 @@
-package controllers.api.models
+package controllers.models
 
 case class APIError(errorMessage: String)
