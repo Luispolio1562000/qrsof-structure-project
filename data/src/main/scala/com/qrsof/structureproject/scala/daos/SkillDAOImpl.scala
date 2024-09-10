@@ -5,6 +5,7 @@ import com.qrsof.structureproject.scala.admin.skill.models.{APIError, Skill}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import play.api.mvc._
 import slick.jdbc.JdbcProfile
+import play.api._
 
 import java.util.UUID
 import javax.inject.{Inject, Singleton}
@@ -42,6 +43,20 @@ class SkillDAOImpl @Inject()(protected val dbConfigProvider: DatabaseConfigProvi
       }
     }
   }
+
+
+  override def deleteSkillById(id: UUID): Future[Int] = {
+    db.run(skillTable.filter(_.id === id).delete)
+
+  }
+
+  override def updateSkillById(id: UUID, skill: Skill): Future[Int] = {
+
+    db.run(skillTable.filter(_.id === id).map(_.name).update(skill.name))
+  }
+
+
+
 
 
 

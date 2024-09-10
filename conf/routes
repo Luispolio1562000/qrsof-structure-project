@@ -4,9 +4,10 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /skills              controllers.api.skill.SkillControllerImpl.getSkills()
-GET         /skills/:id          controllers.api.skill.SkillControllerImpl.getSkillById(id: java.util.UUID)
-POST        /skills              controllers.api.skill.SkillControllerImpl.createSkill()
-
+GET           /skills              controllers.api.skill.SkillControllerImpl.getSkills()
+GET           /skills/:id          controllers.api.skill.SkillControllerImpl.getSkillById(id: java.util.UUID)
+POST          /skills              controllers.api.skill.SkillControllerImpl.createSkill()
+PUT           /skills/:id          controllers.api.skill.SkillControllerImpl.updateSkillById(id: java.util.UUID)
+DELETE        /skills/:id          controllers.api.skill.SkillControllerImpl.deleteSkillById(id: java.util.UUID)
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)

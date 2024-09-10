@@ -19,6 +19,16 @@ class SkillServiceImpl @Inject()(skillRepository: SkillDAO) extends SkillService
   override def createSkill(skill: Skill): Future[Either[APIError, Skill]] = {
     skillRepository.createSkill(skill)
   }
+  
+  
+  override def deleteSkillById(id: UUID): Future[Int] = {
+    skillRepository.deleteSkillById(id)
+  }
+
+
+  override def updateSkillById(id: UUID, skill: Skill): Future[Int] = {
+    skillRepository.updateSkillById(id, skill)
+  }
 
 
 }
